@@ -1,9 +1,18 @@
+import { useContext } from "react";
 import { Header } from "../../components/header";
 import { Summary } from "../../components/summary";
+import { TransactionContext } from "../../contexts/transactionContext";
+import { dateFormatter, priceFormatter } from "../../utils/formatter";
 import { SearchForm } from "./components/searchForm";
 import { PriceHigthLigth, TransactionContainer, TransactionTable } from "./styles";
 
+
+
 export function Transaction(){
+
+  const {transaction} = useContext(TransactionContext);
+
+
     return (
       <div>
         <Header />
@@ -13,26 +22,22 @@ export function Transaction(){
 
           <TransactionTable>
             <tbody>
-              <tr>
-                <td width="50%">Desenvolvimento de Site</td>
-                <td>
-                  <PriceHigthLigth variant="income">
-                    R$ 12.000,00
-                  </PriceHigthLigth>
-                </td>
-                <td>Venda</td>
-                <td>13/04/2022</td>
-              </tr>
-              <tr>
-                <td width="50%">Hamburguer</td>
-                <td>
-                  <PriceHigthLigth variant="outcome">
-                    - R$ 59,00
-                  </PriceHigthLigth>
-                </td>
-                <td>Venda</td>
-                <td>13/04/2022</td>
-              </tr>
+                {transaction.map(transaction => {
+                  return (
+                    <tr key={transaction.id}>
+                      <td width="50%">{transaction.description}</td>
+                      <td>
+                        <PriceHigthLigth variant={transaction.type}>
+                          {transaction.type === 'outcome' && '- '}
+                          {priceFormatter.format(transaction.price)}
+                        </PriceHigthLigth>
+                      </td>
+                      <td>{transaction.category}</td>
+                      <td>{dateFormatter.format(new Date(transaction.createAt))}</td>
+                    </tr>
+                  );
+                })}
+              
             </tbody>
           </TransactionTable>
         </TransactionContainer>
