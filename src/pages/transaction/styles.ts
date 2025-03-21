@@ -36,8 +36,7 @@ interface PriceHigthLigthProps {
   variant: "income" | "outcome";
 }
 
-export const PriceHigthLigth = styled.span<PriceHigthLigthProps>
-`
+export const PriceHigthLigth = styled.span<PriceHigthLigthProps>`
     color: ${(props) => props.variant === 'income' ? props.theme["green-300"] : props.theme["red-300"]};
 
 `

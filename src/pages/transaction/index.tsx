@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContextSelector } from "use-context-selector";
 import { Header } from "../../components/header";
 import { Summary } from "../../components/summary";
 import { TransactionContext } from "../../contexts/transactionContext";
@@ -10,7 +10,9 @@ import { PriceHigthLigth, TransactionContainer, TransactionTable } from "./style
 
 export function Transaction(){
 
-  const {transaction} = useContext(TransactionContext);
+  const transaction = useContextSelector(TransactionContext, (context) => {
+    return context.transaction;
+  });
 
 
     return (
@@ -33,7 +35,7 @@ export function Transaction(){
                         </PriceHigthLigth>
                       </td>
                       <td>{transaction.category}</td>
-                      <td>{dateFormatter.format(new Date(transaction.createAt))}</td>
+                      <td>{dateFormatter.format(new Date(transaction.createdAt))}</td>
                     </tr>
                   );
                 })}
