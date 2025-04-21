@@ -47,6 +47,14 @@
       "category": "compra",
       "type": "outcome",
       "createdAt": "2025-03-21T13:18:24.107Z"
+    },
+    {
+      "description": "Setup",
+      "price": 1000,
+      "category": "compra",
+      "type": "outcome",
+      "createdAt": "2025-04-21T16:57:54.298Z",
+      "id": "KdcZoa3"
     }
   ]
 }
